@@ -1,0 +1,21 @@
+# ═══════════════════════════════════════════════════════════════
+# Docker Compose — Local Development
+# ═══════════════════════════════════════════════════════════════
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: shahid-portfolio
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

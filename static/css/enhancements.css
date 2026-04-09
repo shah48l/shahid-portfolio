@@ -1,0 +1,64 @@
+/* ==========================================================================
+   ENHANCEMENTS CSS
+   ========================================================================== */
+
+/* ══ LOADING SCREEN ══ */
+.loader { position: fixed; inset: 0; z-index: 99999; background: var(--c-void); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.loader--hidden { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s, visibility 0.5s; }
+.loader__ascii { font-family: var(--f-mono); font-size: clamp(6px, 1.1vw, 13px); color: var(--c-mint); white-space: pre; line-height: 1.15; text-align: center; opacity: 0; text-shadow: 0 0 20px var(--c-mint-glow); }
+.loader__subtitle { font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--c-text-400); margin-top: var(--sp-6); opacity: 0; letter-spacing: var(--ls-wide); }
+.loader__bar-track { width: 200px; height: 2px; background: var(--c-border); border-radius: 1px; margin-top: var(--sp-4); overflow: hidden; opacity: 0; }
+.loader__bar-fill { height: 100%; width: 0%; background: var(--c-mint); border-radius: 1px; box-shadow: 0 0 12px var(--c-mint-glow); }
+
+/* ══ SPLASH CURSOR CANVAS ══ */
+#splashCanvas { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.7; }
+#splashCanvas.interactive { pointer-events: auto; }
+
+/* ══ LOGO LOOP ══ */
+.logo-loop { padding-block: var(--sp-4); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); overflow: hidden; position: relative; z-index: var(--z-base); }
+.logo-loop__track { display: flex; gap: var(--sp-8); width: max-content; }
+.logo-loop__item { display: flex; align-items: center; gap: var(--sp-3); font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--c-text-400); white-space: nowrap; flex-shrink: 0; }
+.logo-loop__icon { width: 22px; height: 22px; flex-shrink: 0; opacity: 0.7; }
+.logo-loop__icon svg { width: 100%; height: 100%; }
+
+/* ══ BORDER GLOW on skill cards ══ */
+.skill-card { position: relative; will-change: transform, border-color, box-shadow; }
+.skill-card::after {
+  content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+  background: conic-gradient(from var(--glow-angle, 0deg) at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, var(--c-mint) 10%, transparent 20%);
+  opacity: 0; transition: opacity 0.4s; z-index: -1;
+}
+.skill-card:hover::after { opacity: 0.3; }
+.skill-card:hover { border-color: var(--c-mint) !important; transform: translateY(-8px) !important; box-shadow: 0 8px 40px rgba(0,255,170,0.08), var(--shadow-card) !important; background: var(--c-elevated); }
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card__icon { display: block; width: fit-content; transition: none; }
+.skill-card:hover .skill-card__name { color: var(--c-mint); transition: color var(--dur-normal); }
+.skill-card:hover .tag { border-color: rgba(0,255,170,0.3) !important; color: var(--c-mint) !important; background: var(--c-mint-dim); }
+
+/* ══ MUSIC PLAYER ══ */
+.music-toggle { position: fixed; bottom: var(--sp-5); right: var(--sp-5); z-index: var(--z-overlay); display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-4); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-full); font-family: var(--f-mono); font-size: 11px; color: var(--c-text-400); cursor: pointer; transition: all var(--dur-normal); backdrop-filter: blur(16px); }
+.music-toggle:hover { border-color: var(--c-mint); color: var(--c-mint); }
+.music-toggle.active { color: var(--c-mint); border-color: var(--c-mint); box-shadow: 0 0 20px var(--c-mint-dim); }
+.music-toggle__vinyl { width: 20px; height: 20px; border-radius: 50%; border: 2px solid currentColor; display: flex; align-items: center; justify-content: center; }
+.music-toggle__vinyl::after { content: ''; width: 4px; height: 4px; background: currentColor; border-radius: 50%; }
+.music-toggle.active .music-toggle__vinyl { animation: vinyl-spin 2s linear infinite; }
+@keyframes vinyl-spin { to { transform: rotate(360deg); } }
+
+/* ══ CIRCUIT BOARD BG ══ */
+.circuit-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.4; }
+
+/* ══ CONTACT LINKS — ensure always visible ══ */
+.contact__link { position: relative; overflow: hidden; /* Do NOT set opacity: 0 here */ }
+.contact__link::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--c-mint-dim), transparent); opacity: 0; transition: opacity var(--dur-normal); }
+.contact__link:hover::before { opacity: 1; }
+.contact__link svg { transition: transform 0.3s var(--ease-spring); }
+.contact__link:hover svg { transform: scale(1.2) rotate(-5deg); }
+
+/* ══ PROXIMITY TEXT ══ */
+.proximity-text__char { display: inline-block; transition: color 0.15s, text-shadow 0.15s, font-weight 0.15s; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 768px) {
+  .music-toggle { bottom: var(--sp-3); right: var(--sp-3); }
+  .logo-loop__item { font-size: 12px; }
+}
