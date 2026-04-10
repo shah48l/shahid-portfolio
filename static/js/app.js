@@ -15,9 +15,9 @@
     const btn = document.getElementById('musicToggle');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      const playing = AmbientMusic.toggle();
+      const playing = JazzPlayer.toggle();
       btn.classList.toggle('active', playing);
-      btn.querySelector('.music-toggle__label').textContent = playing ? 'Ambient On' : 'Ambient Off';
+      btn.querySelector('.music-toggle__label').textContent = playing ? 'Jazz On' : 'Jazz Off';
     });
   }
 
@@ -55,13 +55,9 @@
     _bindSoundToggle();
     _bindMusicToggle();
 
-    // 3. Ambient Music auto-start on first interaction
-    if (typeof AmbientMusic !== 'undefined') {
-      document.addEventListener('click', () => {
-        if (!AmbientMusic.isActive()) {
-          AmbientMusic.play();
-        }
-      }, { once: true });
+    // 3. Jazz Music auto-start on first interaction
+    if (typeof JazzPlayer !== 'undefined') {
+      JazzPlayer.bindAutoStart();
     }
 
     // 4. GSAP animations

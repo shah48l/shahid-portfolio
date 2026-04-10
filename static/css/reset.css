@@ -49,4 +49,4 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 /* ── Loading state (hidden after GSAP init) ── */
-.js-loading { opacity: 0; }
+.js-loading > *:not(.loader) { opacity: 0; }

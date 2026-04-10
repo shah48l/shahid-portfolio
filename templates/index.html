@@ -21,7 +21,8 @@
   <div class="loader" id="loader">
     <pre class="loader__ascii" id="loaderAscii"></pre>
     <div class="loader__subtitle" id="loaderSubtitle">Welcome to Shahid's personal space</div>
-    <div class="loader__bar-track"><div class="loader__bar-fill" id="loaderBarFill"></div></div>
+    <button class="loader__enter" id="loaderEnter">Click to Enter</button>
+    <div class="loader__bar-track" id="loaderBarTrack"><div class="loader__bar-fill" id="loaderBarFill"></div></div>
   </div>
 
   <!-- Ambient -->
@@ -35,19 +36,24 @@
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <!-- Music Toggle -->
-  <button class="music-toggle" id="musicToggle" aria-label="Toggle ambient music"><span class="music-toggle__vinyl"></span><span class="music-toggle__label">Ambient Off</span></button>
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle jazz music"><span class="music-toggle__vinyl"></span><span class="music-toggle__label">Jazz Off</span></button>
 
   <!-- NAV -->
   <nav class="nav" id="navbar" role="navigation" aria-label="Main">
     <a href="#hero" class="nav__logo">shahid<span>.dev</span></a>
-    <div class="nav__links">
-      <a href="#skills" class="nav__link">Skills</a>
-      <a href="#experience" class="nav__link">Experience</a>
-      <a href="#projects" class="nav__link">Projects</a>
-      <a href="#education" class="nav__link">Education</a>
-      <a href="#contact" class="nav__link">Contact</a>
+    <button class="nav__hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span class="nav__hamburger-line"></span>
+      <span class="nav__hamburger-line"></span>
+      <span class="nav__hamburger-line"></span>
+    </button>
+    <div class="nav__links" id="navLinks">
+      <a href="#skills" class="nav__link" data-section="skills">Skills</a>
+      <a href="#experience" class="nav__link" data-section="experience">Experience</a>
+      <a href="#projects" class="nav__link" data-section="projects">Projects</a>
+      <a href="#education" class="nav__link" data-section="education">Education</a>
+      <a href="#contact" class="nav__link" data-section="contact">Contact</a>
     </div>
-    <div class="flex items-center gap-4">
+    <div class="nav__right flex items-center gap-4">
       <button class="nav__sound-toggle" id="soundToggle" aria-label="Toggle SFX"><span class="bars"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span><span class="label">SFX Off</span></button>
       <div class="nav__status"><span class="nav__status-dot"></span>Open to work</div>
     </div>
@@ -189,7 +195,7 @@
     </div>
   </section>
 
-  <footer class="footer"><span>Designed &amp; Built by Shahid J</span><span>&copy; 2026</span></footer>
+  <footer class="footer"><span>Designed &amp; Built by Shahid J</span><span>Music: "Lobby Time" by Kevin MacLeod (incompetech.com) — CC BY 4.0</span><span>&copy; 2026</span></footer>
 
   <!-- SCRIPTS — Ambient music, project effects -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -197,6 +203,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
   <script src="/static/js/sound.js"></script>
   <script src="/static/js/ambient.js"></script>
+  <script src="/static/js/jazz.js"></script>
   <script src="/static/js/loader.js"></script>
   <script src="/static/js/effects.js"></script>
   <script src="/static/js/project-effects.js"></script>
