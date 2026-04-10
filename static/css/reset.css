@@ -24,6 +24,10 @@ body {
   line-height: var(--lh-normal);
   overflow-x: hidden;
   cursor: default;
+  position: relative;
+  z-index: 2;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 img, svg { display: block; max-width: 100%; }

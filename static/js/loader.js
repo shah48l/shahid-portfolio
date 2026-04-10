@@ -24,12 +24,12 @@ const Loader = (() => {
 
       // Check if GSAP is available
       if (typeof gsap === 'undefined') {
-        // GSAP not available - just wait 5 seconds and resolve
+        // GSAP not available - just wait 3 seconds and resolve
         setTimeout(() => {
           loader.style.display = 'none';
           document.body.style.overflow = '';
           resolve();
-        }, 5000);
+        }, 3000);
         return;
       }
 
@@ -38,7 +38,7 @@ const Loader = (() => {
 
       const tl = gsap.timeline({
         onComplete: () => {
-          // Wait additional time (total 5 seconds)
+          // Wait additional time (total 3 seconds)
           setTimeout(() => {
             gsap.to(loader, {
               opacity: 0, duration: 0.6, ease: 'power2.inOut',
@@ -48,7 +48,7 @@ const Loader = (() => {
                 resolve(); 
               }
             });
-          }, 3400); // 5 seconds total - 1.6 seconds of animations
+          }, 1400); // 3 seconds total - 1.6 seconds of animations
         }
       });
 
