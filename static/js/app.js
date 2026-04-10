@@ -15,9 +15,9 @@
     const btn = document.getElementById('musicToggle');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      const playing = JazzPlayer.toggle();
+      const playing = AmbientMusic.toggle();
       btn.classList.toggle('active', playing);
-      btn.querySelector('.music-toggle__label').textContent = playing ? 'Jazz On' : 'Jazz Off';
+      btn.querySelector('.music-toggle__label').textContent = playing ? 'Ambient On' : 'Ambient Off';
     });
   }
 
@@ -50,34 +50,41 @@
     // 1. Loader
     await Loader.init();
 
-    // 2. WebGL Splash Cursor (replaces custom cursor entirely)
-    SplashCursor.init();
-    const sc = document.getElementById('splashCanvas');
-    if (sc) sc.classList.add('interactive');
+    // 2. Target Cursor (ReactBits-inspired animated cursor)
+    if (typeof TargetCursor !== 'undefined') {
+      TargetCursor.init();
+    }
 
-    // 3. NO custom cursor — splash cursor IS the cursor effect
-
-    // 4. Sounds
+    // 3. Sounds
     SoundManager.bindUI();
     _bindSoundToggle();
     _bindMusicToggle();
 
-    // 5. Jazz auto-start on first interaction
-    JazzPlayer.bindAutoStart();
+    // 4. Ambient Music auto-start on first interaction
+    if (typeof AmbientMusic !== 'undefined') {
+      document.addEventListener('click', () => {
+        if (!AmbientMusic.isActive()) {
+          AmbientMusic.play();
+        }
+      }, { once: true });
+    }
 
-    // 6. GSAP animations
+    // 5. GSAP animations
     Animations.init();
     _fixSkillCardHover();
 
-    // 7. Navigation
+    // 6. Navigation
     Navigation.init();
 
-    // 8. Terminal
+    // 7. Terminal
     Terminal.start('terminalBody', 800);
 
-    // 9. Effects + magnetic
+    // 8. Effects + magnetic + project hover
     _magneticButtons();
     Effects.init();
+    if (typeof ProjectEffects !== 'undefined') {
+      ProjectEffects.init();
+    }
 
     console.log('%c✦ shahid.dev loaded', 'color:#00ffaa;font-family:monospace;font-size:14px;');
   }
