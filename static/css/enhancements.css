@@ -9,6 +9,31 @@
 .loader__subtitle { font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--c-text-400); margin-top: var(--sp-6); opacity: 0; letter-spacing: var(--ls-wide); text-align: center; }
 .loader__bar-track { width: 200px; max-width: 80%; height: 2px; background: var(--c-border); border-radius: 1px; margin-top: var(--sp-4); overflow: hidden; opacity: 0; }
 .loader__bar-fill { height: 100%; width: 0%; background: var(--c-mint); border-radius: 1px; box-shadow: 0 0 12px var(--c-mint-glow); }
+.loader__enter {
+  font-family: var(--f-mono);
+  font-size: var(--fs-sm);
+  color: var(--c-mint);
+  background: transparent;
+  border: 1px solid var(--c-mint);
+  border-radius: var(--r-full);
+  padding: var(--sp-2) var(--sp-6);
+  margin-top: var(--sp-6);
+  cursor: pointer;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: all 0.3s ease;
+  animation: enter-pulse 2s ease-in-out infinite;
+}
+.loader__enter:hover {
+  background: var(--c-mint);
+  color: var(--c-void);
+  box-shadow: 0 0 25px var(--c-mint-glow);
+}
+@keyframes enter-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--c-mint-dim); }
+  50% { box-shadow: 0 0 20px var(--c-mint-glow); }
+}
 
 /* ══ PROJECT CARD HOVER EFFECTS ══ */
 .project-card {
