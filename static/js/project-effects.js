@@ -7,7 +7,7 @@ const ProjectEffects = (() => {
   'use strict';
 
   function init() {
-    const cards = document.querySelectorAll('.project-card');
+    const cards = document.querySelectorAll('.project-card, .edu-card');
     
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
