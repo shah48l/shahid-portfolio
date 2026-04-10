@@ -50,17 +50,12 @@
     // 1. Loader
     await Loader.init();
 
-    // 2. Target Cursor (ReactBits-inspired animated cursor)
-    if (typeof TargetCursor !== 'undefined') {
-      TargetCursor.init();
-    }
-
-    // 3. Sounds
+    // 2. Sounds
     SoundManager.bindUI();
     _bindSoundToggle();
     _bindMusicToggle();
 
-    // 4. Ambient Music auto-start on first interaction
+    // 3. Ambient Music auto-start on first interaction
     if (typeof AmbientMusic !== 'undefined') {
       document.addEventListener('click', () => {
         if (!AmbientMusic.isActive()) {
@@ -69,17 +64,17 @@
       }, { once: true });
     }
 
-    // 5. GSAP animations
+    // 4. GSAP animations
     Animations.init();
     _fixSkillCardHover();
 
-    // 6. Navigation
+    // 5. Navigation
     Navigation.init();
 
-    // 7. Terminal
+    // 6. Terminal
     Terminal.start('terminalBody', 800);
 
-    // 8. Effects + magnetic + project hover
+    // 7. Effects + magnetic + project hover
     _magneticButtons();
     Effects.init();
     if (typeof ProjectEffects !== 'undefined') {

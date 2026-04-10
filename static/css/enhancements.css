@@ -10,9 +10,6 @@
 .loader__bar-track { width: 200px; height: 2px; background: var(--c-border); border-radius: 1px; margin-top: var(--sp-4); overflow: hidden; opacity: 0; }
 .loader__bar-fill { height: 100%; width: 0%; background: var(--c-mint); border-radius: 1px; box-shadow: 0 0 12px var(--c-mint-glow); }
 
-/* ══ SPLASH CURSOR CANVAS ══ */
-/* Removed - using target cursor instead */
-
 /* ══ PROJECT CARD HOVER EFFECTS ══ */
 .project-card {
   position: relative;
