@@ -50,13 +50,33 @@
     // 1. Loader
     await Loader.init();
 
-    // 2. Sounds
+    // 2. Sounds - enable by default
     SoundManager.bindUI();
+    SoundManager.enable(); // Turn SFX on by default
     _bindSoundToggle();
+    
+    // Update the toggle button UI to show it's on
+    const soundToggle = document.getElementById('soundToggle');
+    if (soundToggle) {
+      soundToggle.classList.add('active');
+      const label = soundToggle.querySelector('.label');
+      if (label) label.textContent = 'SFX On';
+    }
+
     _bindMusicToggle();
 
-    // 3. Jazz Music auto-start on first interaction
+    // 3. Jazz Music auto-start on landing page (with user gesture)
     if (typeof JazzPlayer !== 'undefined') {
+      // Start jazz music after a brief delay post-loader
+      setTimeout(() => {
+        JazzPlayer.play();
+        const musicToggle = document.getElementById('musicToggle');
+        if (musicToggle) {
+          musicToggle.classList.add('active');
+          const label = musicToggle.querySelector('.music-toggle__label');
+          if (label) label.textContent = 'Jazz On';
+        }
+      }, 1200);
       JazzPlayer.bindAutoStart();
     }
 
