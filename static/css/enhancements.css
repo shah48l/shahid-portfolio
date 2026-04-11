@@ -193,7 +193,13 @@
 .logo-loop__item:hover .logo-loop__icon {
   opacity: 1;
 }
-.logo-loop__icon svg { width: 100%; height: 100%; }
+.logo-loop__icon svg,
+.logo-loop__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 
 @keyframes scroll-horizontal {
   0% { transform: translateX(0); }
