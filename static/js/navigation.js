@@ -98,12 +98,16 @@ const Navigation = (() => {
           }
         }
 
-        // GSAP smooth scroll
-        gsap.to(window, {
-          scrollTo: { y: target, offsetY: 80 },
-          duration: 1,
-          ease: 'expo.inOut',
-        });
+        if (typeof window.gsap !== 'undefined' && typeof window.ScrollToPlugin !== 'undefined') {
+          gsap.to(window, {
+            scrollTo: { y: target, offsetY: 80 },
+            duration: 1,
+            ease: 'expo.inOut',
+          });
+        } else {
+          const top = target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
 
         SoundManager.playClick();
       });

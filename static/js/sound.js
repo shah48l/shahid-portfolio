@@ -9,6 +9,7 @@ const SoundManager = (() => {
   let _ctx = null;
   let _enabled = false;
   let _initialized = false;
+  let _lastRichHover = 0;
 
   function _getCtx() {
     if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -90,6 +91,15 @@ const SoundManager = (() => {
     });
   }
 
+  function playRichHover() {
+    if (!_enabled) return;
+    const now = Date.now();
+    if (now - _lastRichHover < 90) return;
+    _lastRichHover = now;
+    playHover();
+    playCardFlip();
+  }
+
   let _lastTick = 0;
   function playScrollTick() {
     if (!_enabled) return;
@@ -155,14 +165,14 @@ const SoundManager = (() => {
     document.querySelectorAll('a, button, .btn').forEach(el => {
       el.addEventListener('click', playClick);
     });
-    document.querySelectorAll('.skill-card').forEach(el => {
-      el.addEventListener('mouseenter', playCardFlip);
+    document.querySelectorAll('.skill-card, .project-card, .edu-card, .contact__link, .btn, .music-toggle, .nav__sound-toggle').forEach(el => {
+      el.addEventListener('mouseenter', playRichHover);
     });
     window.addEventListener('scroll', playScrollTick, { passive: true });
   }
 
   return {
     enable, toggle, isEnabled, playHover, playClick, playSwoosh, playKeystroke,
-    playCardFlip, playScrollTick, playNavWhoosh, playBootChime, bindUI,
+    playCardFlip, playRichHover, playScrollTick, playNavWhoosh, playBootChime, bindUI,
   };
 })();

@@ -1,6 +1,12 @@
 (function App() {
   'use strict';
 
+  function _hasGsap() {
+    return typeof window.gsap !== 'undefined'
+      && typeof window.ScrollTrigger !== 'undefined'
+      && typeof window.ScrollToPlugin !== 'undefined';
+  }
+
   function _bindSoundToggle() {
     const btn = document.getElementById('soundToggle');
     if (!btn) return;
@@ -22,6 +28,7 @@
   }
 
   function _magneticButtons() {
+    if (typeof window.gsap === 'undefined') return;
     if (window.matchMedia('(hover: none)').matches) return;
     document.querySelectorAll('.magnetic').forEach(el => {
       el.addEventListener('mousemove', e => {
@@ -35,6 +42,7 @@
   }
 
   function _fixSkillCardHover() {
+    if (typeof window.gsap === 'undefined' || typeof window.ScrollTrigger === 'undefined') return;
     gsap.utils.toArray('.skill-card').forEach(card => {
       ScrollTrigger.create({
         trigger: card, start: 'top 92%',
@@ -45,7 +53,10 @@
   }
 
   async function boot() {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    const hasGsap = _hasGsap();
+    if (hasGsap) {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    }
 
     // 1. Loader
     await Loader.init();
@@ -80,9 +91,13 @@
       JazzPlayer.bindAutoStart();
     }
 
-    // 4. GSAP animations
-    Animations.init();
-    _fixSkillCardHover();
+    // 4. Reveal the page even if GSAP/CDN assets fail to load
+    if (hasGsap) {
+      Animations.init();
+      _fixSkillCardHover();
+    } else {
+      document.body.classList.remove('js-loading');
+    }
 
     // 5. Navigation
     Navigation.init();
