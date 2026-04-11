@@ -79,6 +79,11 @@ const JazzPlayer = (() => {
     }
   }
 
+  function play() {
+    start();
+    return _playing;
+  }
+
   function stop() {
     if (!_playing) return;
     _playing = false;
@@ -120,5 +125,5 @@ const JazzPlayer = (() => {
     _ensureAudio();
   }
 
-  return { toggle, start, stop, isActive, bindAutoStart };
+  return { toggle, start, play, stop, isActive, bindAutoStart };
 })();

@@ -136,6 +136,13 @@ const SoundManager = (() => {
     });
   }
 
+  function enable() {
+    if (_enabled) return true;
+    _enabled = true;
+    playBootChime();
+    return _enabled;
+  }
+
   function toggle() { _enabled = !_enabled; if (_enabled) playBootChime(); return _enabled; }
   function isEnabled() { return _enabled; }
 
@@ -155,7 +162,7 @@ const SoundManager = (() => {
   }
 
   return {
-    toggle, isEnabled, playHover, playClick, playSwoosh, playKeystroke,
+    enable, toggle, isEnabled, playHover, playClick, playSwoosh, playKeystroke,
     playCardFlip, playScrollTick, playNavWhoosh, playBootChime, bindUI,
   };
 })();
